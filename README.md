@@ -1,1 +1,0 @@
-# logoshot_web
