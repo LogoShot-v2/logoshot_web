@@ -48,17 +48,18 @@ export const SIZES = {
 };
 
 export const FONTS = {
-  superlargeTitle: { fontFamily: "Roboto-Black", fontSize: SIZES.superlargeTitle, height: 55 },
-  largeTitle: { fontFamily: "Roboto-Black", fontSize: SIZES.largeTitle, height: 55 },
-  mediumTitle: { fontFamily: "Roboto-Black", fontSize: SIZES.mediumTitle, height: 55 },
-  h1: { fontFamily: "Roboto-Black", fontSize: SIZES.h1, height: 36 },
-  h2: { fontFamily: "Roboto-Bold", fontSize: SIZES.h2, height: 30 },
-  h3: { fontFamily: "Roboto-Bold", fontSize: SIZES.h3, height: 22 },
-  h4: { fontFamily: "Roboto-Regular", fontSize: SIZES.h4, height: 22 },
-  body1: { fontFamily: "Roboto-Regular", fontSize: SIZES.body1, height: 36 },
-  body2: { fontFamily: "Roboto-Regular", fontSize: SIZES.body2, height: 30 },
-  body3: { fontFamily: "Roboto-Regular", fontSize: SIZES.body3, height: 22 },
-  body4: { fontFamily: "Roboto-Regular", fontSize: SIZES.body4, height: 22 },
+  superlargeTitle: {display:'flex', fontFamily: "Roboto-Black", fontSize: SIZES.superlargeTitle },
+  largeTitle: {display:'flex', fontFamily: "Roboto-Black", fontSize: SIZES.largeTitle },
+  mediumTitle: {display:'flex', fontFamily: "Roboto-Black", fontSize: SIZES.mediumTitle },
+  h1: {display:'flex', fontFamily: "Roboto-Black", fontSize: SIZES.h1, },
+  h2: {display:'flex', fontFamily: "Roboto-Bold", fontSize: SIZES.h2, },
+  h3: {display:'flex', fontFamily: "Roboto-Bold", fontSize: SIZES.h3, },
+  h4: {display:'flex', fontFamily: "Roboto-Regular", fontSize: SIZES.h4,},
+  body1: {display:'flex', fontFamily: "Roboto-Regular", fontSize: SIZES.body1},
+  body2: {display:'flex', fontFamily: "Roboto-Regular", fontSize: SIZES.body2},
+  body3: { display:'flex',fontFamily: "Roboto-Regular", fontSize: SIZES.body3},
+  body4: { display:'flex',fontFamily: "Roboto-Regular", fontSize: SIZES.body4},
+  img: {display:'flex', width: '400px', height:'400px'}
 };
 
 const appTheme = { COLORS, SIZES, FONTS };

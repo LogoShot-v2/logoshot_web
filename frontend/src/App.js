@@ -7,7 +7,7 @@ import NavBar from './components/Nav';
 import InspiringSearch from './pages/InspiringSearch';
 import ImageSearch from './pages/ImageSearch';
 import TextSearch from './pages/TextSearch';
-
+import Result from './pages/Result';
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
         <Route path="/inspiringSearch" element={<InspiringSearch/>}/>
         <Route path='/imageSearch' element={<ImageSearch/>}/>
         <Route path="/textSearch" element={<TextSearch/>}/>
+        <Route path="/result" element={<Result/>}/>
       </Routes>
     </Box>
     </>
