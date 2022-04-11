@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { COLORS, FONTS } from "../constant";
 import { Background, CenterDiv, MainDiv, RightDiv} from "../constant/pages";
 import {Chip, requirePropFactory, Stack, Button} from '@mui/material';
@@ -8,28 +8,74 @@ import { typography } from "@mui/system";
 
 const labels = ['Circles', 'Animals', 'Plants', 'Others']
 const InspiringSearch = () =>{
-    const [lableChosen, setLableChosen] = useState('Circles');
-    const [imageList, setImageList] = useState(null);
-
-    
+    const [labelChosen, setLabelChosen] = useState(0);
+    const [imageList, setImageList] = useState([]);
+    const [count, setCount] = useState(0);
+    const [start, setStart] = useState(false);
 
     const clickChip = async (index) =>{
-        if(labels[index] !== lableChosen){
-            setLableChosen(labels[index]);
+        if(index !== labelChosen){
+            setImageList([]);
+            setLabelChosen(index);
+            setStart(false);
             console.log('click chip');
             console.log('hi');
-            try{
-                var images = await GET_IMAGE3(index);
-                setImageList(images);
-                console.log('images', images);
-            }catch(e){
-                console.log(e);
+            const fetchData = async () => {
+                try{
+                    var images = await GET_IMAGE3(labelChosen);
+                    setImageList(images);
+                }catch(e){
+                    console.log(e);
+                }
             }
-            
-            
+            fetchData();
         }
     }
 
+    useEffect(()=>{
+        if(start && imageList !== []){
+            const interval = setInterval(()=>{
+                setCount((count)=> (count+1) % imageList.length);
+                console.log(count);
+                console.log(imageList.length);
+                // console.log(newCount);
+            }, 1000);
+            return () => clearInterval(interval);
+        }
+    }, [imageList, start])
+
+    // useEffect(()=>{
+    //     if(start){ // start
+    //         const fetchData = async () => {
+    //             try{
+    //                 var images = await GET_IMAGE3(labelChosen);
+    //                 setImageList(images);
+    //             }catch(e){
+    //                 console.log(e);
+    //             }
+    //         }
+    //         fetchData();
+    //     }
+    // },[start])
+
+    useEffect(()=>{
+        const fetchData = async () => {
+            try{
+                var images = await GET_IMAGE3(labelChosen);
+                setImageList(images);
+            }catch(e){
+                console.log(e);
+            }
+        }
+        fetchData();
+    },[])
+
+    const onStartOrStop = ()=>{
+        if(!start){
+            setCount(0);
+        }
+        setStart(!start);
+    }
     
     return (
       <Background>
@@ -42,14 +88,18 @@ const InspiringSearch = () =>{
                         <Chip 
                             label={label}
                             color="primary" 
-                            variant={lableChosen === label? "": "outlined"}
+                            variant={labelChosen === index? "": "outlined"}
                             onClick={()=>clickChip(index)}
                         />
                     )
                 }
             </Stack>
-            <img src={imageList? require(imageList[0]) : require("../assets/icon.png")} style={{...FONTS.img, marginTop: '140px'}}/>
-            <Button variant="contained" style={{marginTop: '140px'}}>STOP</Button>
+            <img src={imageList.length !== 0 ? imageList[count] : require("../assets/icon.png")} style={{...FONTS.img, marginTop: '140px'}}/>
+            <Button 
+                variant='contained' 
+                style={{marginTop: '140px'}}
+                onClick={()=> onStartOrStop()}
+            >{start? 'STOP': 'START'}</Button>
         </CenterDiv>
       </Background>      
     );
