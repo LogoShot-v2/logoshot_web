@@ -5,6 +5,7 @@ import { Background, CenterDiv, MainDiv, RightDiv} from "../constant/pages";
 import {Chip, requirePropFactory, Stack, Button} from '@mui/material';
 import { GET_IMAGE3 } from "../api/api";
 import { typography } from "@mui/system";
+import "../constant/other.css";
 
 const labels = ['Circles', 'Animals', 'Plants', 'Others']
 const InspiringSearch = () =>{
@@ -18,19 +19,34 @@ const InspiringSearch = () =>{
             setImageList([]);
             setLabelChosen(index);
             setStart(false);
-            console.log('click chip');
+            console.log('click chip', labelChosen);
             console.log('hi');
-            const fetchData = async () => {
-                try{
-                    var images = await GET_IMAGE3(labelChosen);
-                    setImageList(images);
-                }catch(e){
-                    console.log(e);
-                }
-            }
-            fetchData();
+            // const fetchData = async () => {
+            //     try{
+            //         console.log('click chip', labelChosen);
+            //         var images = await GET_IMAGE3(labelChosen);
+            //         setImageList(images);
+            //     }catch(e){
+            //         console.log(e);
+            //     }
+            // }
+            // fetchData();
         }
     }
+
+    useEffect(()=>{
+        const fetchData = async () => {
+            try{
+                console.log('click chip', labelChosen);
+                var images = await GET_IMAGE3(labelChosen);
+                setImageList(images);
+            }catch(e){
+                console.log(e);
+            }
+        }
+        fetchData();
+
+    },[labelChosen])
 
     useEffect(()=>{
         if(start && imageList !== []){
@@ -44,31 +60,7 @@ const InspiringSearch = () =>{
         }
     }, [imageList, start])
 
-    // useEffect(()=>{
-    //     if(start){ // start
-    //         const fetchData = async () => {
-    //             try{
-    //                 var images = await GET_IMAGE3(labelChosen);
-    //                 setImageList(images);
-    //             }catch(e){
-    //                 console.log(e);
-    //             }
-    //         }
-    //         fetchData();
-    //     }
-    // },[start])
-
-    useEffect(()=>{
-        const fetchData = async () => {
-            try{
-                var images = await GET_IMAGE3(labelChosen);
-                setImageList(images);
-            }catch(e){
-                console.log(e);
-            }
-        }
-        fetchData();
-    },[])
+    
 
     const onStartOrStop = ()=>{
         if(!start){
@@ -94,7 +86,17 @@ const InspiringSearch = () =>{
                     )
                 }
             </Stack>
-            <img src={imageList.length !== 0 ? imageList[count] : require("../assets/icon.png")} style={{...FONTS.img, marginTop: '140px'}}/>
+            {
+                imageList.length !== 0 ?
+                <img src={ imageList[count]} style={{...FONTS.img, marginTop: '140px'}}/>
+                :
+                <img 
+                    src={require("../assets/loading.png")} 
+                    style={{...FONTS.loading, marginTop: '140px'}}
+                    className="loading"
+                />
+
+            }
             <Button 
                 variant='contained' 
                 style={{marginTop: '140px'}}

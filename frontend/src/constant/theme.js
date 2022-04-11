@@ -1,5 +1,7 @@
 // import { Dimensions } from "react-native";
 
+// import { makeStyles } from "@mui/material";
+
 // const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
@@ -47,6 +49,10 @@ export const SIZES = {
   height: 500,
 };
 
+// const useStyles = makeStyles({
+
+// })
+
 export const FONTS = {
   superlargeTitle: {display:'flex', fontFamily: "Roboto-Black", fontSize: SIZES.superlargeTitle },
   largeTitle: {display:'flex', fontFamily: "Roboto-Black", fontSize: SIZES.largeTitle },
@@ -59,7 +65,8 @@ export const FONTS = {
   body2: {display:'flex', fontFamily: "Roboto-Regular", fontSize: SIZES.body2},
   body3: { display:'flex',fontFamily: "Roboto-Regular", fontSize: SIZES.body3},
   body4: { display:'flex',fontFamily: "Roboto-Regular", fontSize: SIZES.body4},
-  img: {display:'flex', width: '400px', height:'400px'}
+  img: {display:'flex', width: '400px', height:'400px'},
+  loading: {display:'flex', width: '200px', height: '200px', animation: Animation},
 };
 
 const appTheme = { COLORS, SIZES, FONTS };
