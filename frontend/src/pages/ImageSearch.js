@@ -5,17 +5,19 @@ import {uploading2} from '../constant/images';
 import {Chip, requirePropFactory, Stack, Button} from '@mui/material';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Searching } from "../api/api";
 
 
 const ImageSearch = () =>{
 
     const navigate = useNavigate();
-    const [image, setImage] = useState()
+    const [image, setImage] = useState(null);
     const [preview, setPreview] = useState();
 
     const onImageChange = (e)=>{
+
       setImage(e.target.files[0]);
-      console.log(image);
+      console.log(e.target.files[0]);
     }
 
     useEffect(()=>{
@@ -30,8 +32,14 @@ const ImageSearch = () =>{
       }
     }, [image])
 
-    const onClickUpload = (e) =>{
-      navigate('/result');
+    const onClickUpload = async () =>{
+      let startTime = new Date();
+      
+      let returns = await Searching(image, "", [true, true, true, true]);
+      let endTime = new Date();
+      console.log((endTime - startTime)/1000+" seconds");
+      console.log(returns);
+      navigate('/result', {state: returns.photos1});
     }
     return (
       

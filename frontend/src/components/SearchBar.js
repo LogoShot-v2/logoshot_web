@@ -7,7 +7,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
 
-export default function SearchBar() {
+export default function SearchBar({value, onChange}) {
+
+
+
   return (
     <Paper
       component="form"
@@ -17,6 +20,8 @@ export default function SearchBar() {
         sx={{ ml: 1, flex: 1 }}
         placeholder="Enter any text in your trademark"
         inputProps={{ 'aria-label': 'search google maps' }}
+        value = {value}
+        onChange = {(e)=>onChange(e)}
       />
       <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
         <SearchIcon />

@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 export const Background = styled.div`
     display: flex;
+    marginTop:20px;
     flex-direction: row;
     // width: 100%;
     // height: 65em;
@@ -11,7 +12,7 @@ export const Background = styled.div`
     background-position: fixed;
     overflow: auto;
     justify-content: center;
-    // background-color: white;
+    background-color: transparent;
     // background-repeat: repeat-y;
     // background-size: 100vw;
     // background-size: cover;
@@ -41,7 +42,7 @@ export const CenterDiv = styled.div`
     max-width: 1200px;
     min-width: 500px;
     height: 800px;
-    //background: red;
+    background: transparent;
     align-items: center;
     // justify-content: center;
 `
@@ -52,7 +53,7 @@ export const MainDiv = styled.div`
     max-width: 900px;
     min-width: 312.5px;
     //height: 100px;
-    //background: yellow;
+    background: transparent;
     align-items: center;
     // justify-content: center;
     margin-top: 170px;
@@ -61,7 +62,7 @@ export const MainDiv = styled.div`
 export const RightDiv = styled.div`
     flex: 3;
     //display: flex;
-    //background-color: red;
+    background-color: transparent;
     max-width: 500px;
     min-width: 187.5px;
 `

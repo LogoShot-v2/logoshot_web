@@ -7,15 +7,16 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-export default function Logo({result}) {
+export default function Logo({result, photo}) {
   return (
     <>
     <ListItem alignItems="flex-start">
-        <ListItemAvatar style={{width: "40%"}}>
+        <ListItemAvatar style={{width: "30%"}}>
           {/* <Avatar alt="Remy Sharp" src='../assets/images/random1.jpg'/> */}
-          <img src={result.uri} width="100%"></img>
+          <img src={photo} width="100%"></img>
         </ListItemAvatar>
         <ListItemText
+          style={{marginLeft: "20px"}}
           primary={result.trademark_name}
           secondary={
             <React.Fragment>

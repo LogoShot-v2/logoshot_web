@@ -13,15 +13,15 @@ function App() {
   return (
     <>
       <NavBar/>
-      <Box sx={{ flexGrow: 1 }}>
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/inspiringSearch" element={<InspiringSearch/>}/>
-        <Route path='/imageSearch' element={<ImageSearch/>}/>
-        <Route path="/textSearch" element={<TextSearch/>}/>
-        <Route path="/result" element={<Result/>}/>
-      </Routes>
-    </Box>
+      <Box sx={{ flexGrow: 1 }} style={{marginTop: "20px"}}>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/inspiringSearch" element={<InspiringSearch/>}/>
+          <Route path='/imageSearch' element={<ImageSearch/>}/>
+          <Route path="/textSearch" element={<TextSearch/>}/>
+          <Route path="/result" element={<Result/>}/>
+        </Routes>
+      </Box>
     </>
   );
 }

@@ -68,43 +68,77 @@ import { images } from "../constant";
     }
     return photos;
   }
+
+const convertBase64 = (file) =>{
+  return new Promise((resolve, reject)=>{
+    const fileReader = new FileReader();
+
+    fileReader.readAsDataURL(file);
+    fileReader.onload = function(){
+      console.log("result:", fileReader.result);
+      console.log("result3: ", fileReader.result.substring(fileReader.result.indexOf(",") + 1));
+      resolve(fileReader.result.substring(fileReader.result.indexOf(",") + 1));
+    };
+    fileReader.onerror = (error)=>{
+      console.log(error);
+      reject(error);
+    }
+  });
+};
+
+// function convertBase64(img) {
+//   console.log("here");
+//   var canvas = document.createElement("canvas");
+//   canvas.width = img.width;
+//   canvas.height = img.height;
+//   var ctx = canvas.getContext("2d");
+//   ctx.drawImage(img, 0, 0);
+//   var dataURL = canvas.toDataURL("image/png");
+//   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+// }
   
-//   export async function Searching(ImageURL, searchQuery, checkList) {
-//     const data = new FormData();
-//     var initial = "Image Search";
-//     data.append("name", Date.now());
-//     if (ImageURL !== images.uploading2) {
-//       const base64 = await FileSystem.readAsStringAsync(ImageURL.uri, {
-//         encoding: FileSystem.EncodingType.Base64,
-//       });
-//       data.append("file_attachment", base64);
-//     } else {
-//       data.append("file_attachment", null);
-//       initial = "Text Search";
-//     }
-//     data.append("searchQuery", searchQuery);
-//     data.append("check1", checkList[0] ? "true" : "false");
-//     data.append("check2", checkList[1] ? "true" : "false");
-//     data.append("check3", checkList[2] ? "true" : "false");
-//     data.append("check4", checkList[3] ? "true" : "false");
-  
-//     return await axios
-//       .post("/function5", data, {
-//         headers: { "Content-Type": "multipart/form-data; " },
-//         responseType: "json",
-//       })
-//       .then((res) => {
-//         const metadatas1 = res.data.metadatas1;
-//         const base64Images1 = res.data.base64Images1.map((base64Image) => `data:image/jpeg;base64,${base64Image}`);
-//         const metadatas2 = res.data.metadatas2;
-//         const base64Images2 = res.data.base64Images2.map((base64Image) => `data:image/jpeg;base64,${base64Image}`);
-//         let photos1 = ImagePreprocessing(metadatas1, base64Images1);
-//         let photos2 = ImagePreprocessing(metadatas2, base64Images2);
-//         // console.log(photos1.metadatas);
-//         // console.log(photos2.metadatas);
-//         return { photos1: photos1, photos2: photos2, initial: initial };
-//       });
-//   }
+export async function Searching(Image, searchQuery, checkList) {
+  const data = new FormData();
+  var initial = "Image Search";
+  data.append("name", Date.now());
+
+  if (Image) {
+    // const base64 = await FileSystem.readAsStringAsync(ImageURL.uri, {
+    //   encoding: FileSystem.EncodingType.Base64,
+    // });
+    // data.append("file_attachment", base64);
+
+    // const uri = URL.createObjectURL(Image);
+    const base64 = await convertBase64(Image);
+    console.log("base64", base64.data);
+    data.append("file_attachment", base64);
+  } else {
+    data.append("file_attachment", null);
+    initial = "Text Search";
+  }
+  data.append("searchQuery", searchQuery);
+  data.append("check1", checkList[0] ? "true" : "false");
+  data.append("check2", checkList[1] ? "true" : "false");
+  data.append("check3", checkList[2] ? "true" : "false");
+  data.append("check4", checkList[3] ? "true" : "false");
+
+  return await axios
+    .post("/function5", data, {
+      headers: { "Content-Type": "multipart/form-data; " },
+      responseType: "json",
+    })
+    .then((res) => {
+      const metadatas1 = res.data.metadatas1;
+      const base64Images1 = res.data.base64Images1.map((base64Image) => `data:image/jpeg;base64,${base64Image}`);
+      const metadatas2 = res.data.metadatas2;
+      const base64Images2 = res.data.base64Images2.map((base64Image) => `data:image/jpeg;base64,${base64Image}`);
+      let photos1 = ImagePreprocessing(metadatas1, base64Images1);
+      let photos2 = ImagePreprocessing(metadatas2, base64Images2);
+      // console.log(photos1.metadatas);
+      // console.log(photos2.metadatas);
+      return { photos1: photos1, photos2: photos2, initial: initial };
+    });
+}
   
 export async function GET_IMAGE3(label) {
   return await axios
