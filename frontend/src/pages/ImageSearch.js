@@ -6,13 +6,14 @@ import {Chip, requirePropFactory, Stack, Button} from '@mui/material';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Searching } from "../api/api";
-
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const ImageSearch = () =>{
 
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState();
+    const [loading, setLoading] = useState(false);
 
     const onImageChange = (e)=>{
 
@@ -33,12 +34,12 @@ const ImageSearch = () =>{
     }, [image])
 
     const onClickUpload = async () =>{
-      let startTime = new Date();
-      
+      setLoading(true);
+      // let startTime = new Date();
       let returns = await Searching(image, "", [true, true, true, true]);
-      let endTime = new Date();
-      console.log((endTime - startTime)/1000+" seconds");
-      console.log(returns);
+      // let endTime = new Date();
+      // console.log((endTime - startTime)/1000+" seconds");
+      // console.log(returns);
       navigate('/result', {state: returns.photos1});
     }
     return (
@@ -54,10 +55,12 @@ const ImageSearch = () =>{
               preview?<img src={preview} width="100%" ></img>:<img src={uploading2}></img>
             }
           </label>
-          <Button 
+          <LoadingButton 
             variant="contained" 
             style={{marginTop: '140px'}}
-            onClick={onClickUpload}>送出</Button>
+            onClick={onClickUpload}
+            loading={loading}
+          >送出</LoadingButton>
         </CenterDiv>
       </Background>
 

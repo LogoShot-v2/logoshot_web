@@ -21,16 +21,6 @@ const InspiringSearch = () =>{
             setStart(false);
             console.log('click chip', labelChosen);
             console.log('hi');
-            // const fetchData = async () => {
-            //     try{
-            //         console.log('click chip', labelChosen);
-            //         var images = await GET_IMAGE3(labelChosen);
-            //         setImageList(images);
-            //     }catch(e){
-            //         console.log(e);
-            //     }
-            // }
-            // fetchData();
         }
     }
 

@@ -5,9 +5,12 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import CircularProgress from '@mui/material/CircularProgress';
 import DirectionsIcon from '@mui/icons-material/Directions';
+import { Box } from '@mui/material';
+import { Icon } from '@mui/material';
 
-export default function SearchBar({value, onChange}) {
+export default function SearchBar({value, onChange, loading}) {
 
 
 
@@ -23,9 +26,18 @@ export default function SearchBar({value, onChange}) {
         value = {value}
         onChange = {(e)=>onChange(e)}
       />
-      <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
+      
+        {
+          loading?
+          <Icon sx={{display: 'flex', p: '10px', alignItems: 'center', justifyContent: 'center'}}>
+            <CircularProgress color='inherit' style={{display: 'flex', alignSelf: 'center', justifySelf: 'center', width: '20px', height: '20px'}}/>
+          </Icon>
+          :
+          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        }
+      
     </Paper>
   );
 }
