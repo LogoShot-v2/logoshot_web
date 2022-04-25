@@ -53,9 +53,9 @@ const InspiringSearch = () =>{
     
 
     const onStartOrStop = ()=>{
-        if(!start){
-            setCount(0);
-        }
+        // if(!start){
+        //     setCount(0);
+        // }
         setStart(!start);
     }
     
