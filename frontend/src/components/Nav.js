@@ -23,11 +23,9 @@ function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  
   const handleClose = (path) => {
-    setAnchorEl(null);
+    // setAnchorEl(null);
     if(path){
       navigate(path);
     }
@@ -109,11 +107,14 @@ function NavBar() {
               color:'#000000'
             }}
           >
-            <MenuItem key={'找靈感'} onClick={()=>handleCloseNavMenu("/inspiringSearch" )}>
-              <Typography textAlign="center">找靈感</Typography>
+            <MenuItem key={'以圖搜圖'} onClick={()=>handleCloseNavMenu("/imageSearch" )}>
+              <Typography textAlign="center">以圖搜圖</Typography>
             </MenuItem>
-            <MenuItem key={'找商標'} onClick={handleClick}>
-              <Typography textAlign="center">找商標</Typography>
+            <MenuItem key={'文字搜圖'} onClick={()=>handleCloseNavMenu("/textSearch" )}>
+              <Typography textAlign="center">文字搜圖</Typography>
+            </MenuItem>
+            <MenuItem key={'註冊登入'}>
+              <Typography textAlign="center">註冊登入</Typography>
             </MenuItem>
           </Menu>
         </Box>
@@ -143,36 +144,27 @@ function NavBar() {
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, color: '#000000'}}>
           <Button
-            key={'找靈感'}
-            href="/inspiringSearch"
-            onClick={handleCloseNavMenu}
+            key={'以圖搜圖'}
+            href="/imageSearch"
+            onClick={()=>handleClose('/imageSearch')}
             sx={{ my: 2, color: COLORS.gray, ...FONTS.h3 }}
           >
-            找靈感
+            以圖搜圖
           </Button>
           <Button
-            id="fade-button"
-            aria-controls={open ? 'fade-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
+            key={'以圖搜圖'}
+            href="/textSearch"
+            onClick={()=>handleClose('/textSearch')}
             sx={{ my: 2, color: COLORS.gray, ...FONTS.h3 }}
           >
-            找商標
+            文字搜尋
           </Button>
-          <Menu
-            id="fade-menu"
-            MenuListProps={{
-              'aria-labelledby': 'fade-button',
-            }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Fade}
+          <Button
+            key={'註冊登入'}
+            sx={{ my: 2, color: COLORS.gray, ...FONTS.h3 }}
           >
-            <MenuItem onClick={()=>handleClose('/textSearch')}>文字搜尋</MenuItem>
-            <MenuItem onClick={()=>handleClose('/imageSearch')}>以圖搜圖</MenuItem>
-          </Menu>
+            註冊登入
+          </Button>
         </Box>
       </Toolbar>
     </Container>
