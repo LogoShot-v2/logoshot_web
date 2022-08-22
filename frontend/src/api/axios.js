@@ -1,9 +1,13 @@
 import axios from "axios";
 
+import * as https from 'https';
 // axios.defaults.withCredentials = true
 const instance = axios.create({
-  baseURL: `http://140.112.106.203:8081/`,
-  // withCredentials: true,
+  baseURL: `https://140.112.106.82:5000`,
+  httpsAgent: new https.Agent({  
+    rejectUnauthorized: false
+  }),
+  withCredentials: true,
 });
 
 instance.interceptors.response.use(
