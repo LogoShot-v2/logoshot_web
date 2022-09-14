@@ -113,7 +113,7 @@ function NavBar() {
             <MenuItem key={'文字搜圖'} onClick={()=>handleCloseNavMenu("/textSearch" )}>
               <Typography textAlign="center">文字搜圖</Typography>
             </MenuItem>
-            <MenuItem key={'註冊登入'}>
+            <MenuItem key={'註冊登入'} onClick={()=>handleCloseNavMenu("/login" )}>
               <Typography textAlign="center">註冊登入</Typography>
             </MenuItem>
           </Menu>
@@ -161,6 +161,7 @@ function NavBar() {
           </Button>
           <Button
             key={'註冊登入'}
+            onClick={()=>handleClose('/login')}
             sx={{ my: 2, color: COLORS.gray, ...FONTS.h3 }}
           >
             註冊登入

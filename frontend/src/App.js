@@ -8,6 +8,7 @@ import InspiringSearch from './pages/InspiringSearch';
 import ImageSearch from './pages/ImageSearch';
 import TextSearch from './pages/TextSearch';
 import Result from './pages/Result';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/imageSearch' element={<ImageSearch/>}/>
           <Route path="/textSearch" element={<TextSearch/>}/>
           <Route path="/result" element={<Result/>}/>
+          <Route path="/login" element={<Login/>}/>
         </Routes>
       </Box>
     </>
